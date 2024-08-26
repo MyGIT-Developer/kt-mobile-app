@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
     StyledContainer,
     InnerContainer,
@@ -10,15 +11,25 @@ import {
     SubmitButton,
     ButtonText,
 } from './../components/styles';
+import { login } from './../api/auth'; // Import the login function
 
-const Login = () => {
-    const [email, setEmail] = useState('');
+const Login = ({ navigation }) => {
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
-    const handleLogin = () => {
-        // Handle login logic here
-        console.log('Email:', email);
-        console.log('Password:', password);
+    const handleLogin = async () => {
+        try {
+            const data = await login(username, password);
+
+            // Save login response data to local storage
+            await AsyncStorage.setItem('userData', JSON.stringify(data));
+
+            // Navigate to Home screen
+            navigation.replace('Home');
+        } catch (err) {
+            setError(err.message);
+        }
     };
 
     return (
@@ -28,13 +39,7 @@ const Login = () => {
                 <PageLogo resizeMode="cover" source={require('./../assets/kt_app.png')} />
                 <PageTitle>Login</PageTitle>
                 <FormContainer>
-                    <Input
-                        placeholder="Email"
-                        value={email}
-                        onChangeText={setEmail}
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                    />
+                    <Input placeholder="Username" value={username} onChangeText={setUsername} autoCapitalize="none" />
                     <Input
                         placeholder="Password"
                         value={password}
@@ -46,6 +51,7 @@ const Login = () => {
                         <ButtonText>Login</ButtonText>
                     </SubmitButton>
                 </FormContainer>
+                {error ? <Text style={{ color: 'red', marginTop: 10 }}>{error}</Text> : null}
             </InnerContainer>
         </StyledContainer>
     );
