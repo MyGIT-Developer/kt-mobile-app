@@ -10,8 +10,10 @@ import {
     Input,
     SubmitButton,
     ButtonText,
-} from './../components/styles';
-import { login } from './../api/auth'; // Import the login function
+    Text
+} from '../components/styles';
+import { login } from '../api/auth/auth';
+import LogoKTApp from './../../assets/kt_app.png';
 
 const Login = ({ navigation }) => {
     const [username, setUsername] = useState('');
@@ -26,7 +28,7 @@ const Login = ({ navigation }) => {
             await AsyncStorage.setItem('userData', JSON.stringify(data));
 
             // Navigate to Home screen
-            navigation.replace('Home');
+            navigation.replace('/Home');
         } catch (err) {
             setError(err.message);
         }
@@ -36,7 +38,7 @@ const Login = ({ navigation }) => {
         <StyledContainer>
             <StatusBar style="dark" />
             <InnerContainer>
-                <PageLogo resizeMode="cover" source={require('./../assets/kt_app.png')} />
+                <PageLogo resizeMode="cover" source={LogoKTApp} />
                 <PageTitle>Login</PageTitle>
                 <FormContainer>
                     <Input placeholder="Username" value={username} onChangeText={setUsername} autoCapitalize="none" />

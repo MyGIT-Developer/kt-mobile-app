@@ -4,9 +4,9 @@ import { View, Image, StyleSheet } from 'react-native';
 export default function SplashScreen() {
     return (
         <View style={styles.container}>
-            <Image source={require('../assets/kt_icon.png')} style={styles.logo} />
+            <Image source={require('./../../assets/kt_icon.png')} style={styles.logo} />
             <Image
-                source={require('./../assets/kt_city_scapes.png')}
+                source={require('./../../assets/kt_city_scapes.png')}
                 style={styles.cityscape}
                 onError={(error) => console.log(error)}
             />
