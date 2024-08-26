@@ -10,10 +10,11 @@ import {
     Input,
     SubmitButton,
     ButtonText,
-    Text
 } from '../components/styles';
+import { Text } from 'react-native';
 import { login } from '../api/auth/auth';
 import LogoKTApp from './../../assets/kt_app.png';
+import { FormControl } from 'react-bootstrap';
 
 const Login = ({ navigation }) => {
     const [username, setUsername] = useState('');
@@ -39,8 +40,13 @@ const Login = ({ navigation }) => {
             <StatusBar style="dark" />
             <InnerContainer>
                 <PageLogo resizeMode="cover" source={LogoKTApp} />
-                <PageTitle>Login</PageTitle>
+                {/* <PageTitle>Login</PageTitle> */}
+                <Text style={{ fontSize: 16,}}>Please login to continue</Text>
                 <FormContainer>
+                    <FormControl>
+                        <FormLabel></FormLabel>
+                    
+                    </FormControl>
                     <Input placeholder="Username" value={username} onChangeText={setUsername} autoCapitalize="none" />
                     <Input
                         placeholder="Password"
