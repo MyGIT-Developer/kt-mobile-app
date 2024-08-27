@@ -1,18 +1,38 @@
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { useEffect, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Login from './src/screens/Login';
+import Home from './src/screens/Home';
+import SplashScreen from './src/screens/SplashScreen';
 
-//screeen
-import Login from './src/screens/Login.jsx';
-import SplashScreen from './src/screens/SplashScreen.jsx';
-import Home from './src/screens/Home.jsx';
+const Stack = createStackNavigator();
 
 export default function App() {
     const [isShowSplash, setIsShowSplash] = useState(true);
+
     useEffect(() => {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             setIsShowSplash(false);
+            3
         }, 3000);
-    });
-    return <>{isShowSplash ? <SplashScreen /> : <Login />}</>;
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    return (
+        <NavigationContainer>
+            <StatusBar style="dark" />
+            {isShowSplash ? (
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="Splash" component={SplashScreen} />
+                </Stack.Navigator>
+            ) : (
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="Login" component={Login} />
+                    <Stack.Screen name="Home" component={Homez} />
+                </Stack.Navigator>
+            )}
+        </NavigationContainer>
+    );
 }
