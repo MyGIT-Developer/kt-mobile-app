@@ -7,13 +7,20 @@
         "icon": "./assets/icon.png",
         "userInterfaceStyle": "light",
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "infoPlist": {
+                "NSFaceIDUsageDescription": "Your custom description for using Face ID."
+              }
         },
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./assets/adaptive-icon.png",
                 "backgroundColor": "#ffffff"
-            }
+            },
+            "permissions": [
+                "USE_FINGERPRINT",
+                "USE_BIOMETRIC"
+              ]
         },
         "web": {
             "favicon": "./assets/favicon.png"

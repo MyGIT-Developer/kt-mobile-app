@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'; // Ensure AsyncStorage is imported
+import { ScrollView, View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native'; // For navigation
 import { SubmitButton, ButtonText } from '../components/styles'; // Custom button components
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Home = () => {
     const navigation = useNavigation(); // Hook to access navigation
@@ -56,33 +57,82 @@ const Home = () => {
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={{ color: 'black' }}>Ini Homepage</Text>
+        <ScrollView style={styles.container}>
+            <Text style={{ color: 'white', fontWeight: '500', fontSize: 15 }}>Hi, Dhanu</Text>
             <View style={styles.box1}>
                 <Text style={{ color: '#148FFF', fontSize: 18, fontWeight: '500' }}>Absensi</Text>
                 <View style={styles.rowContainer}>
-                    <Text style={{ color: '#d7d7d7', marginRight: 10 }}>{date}</Text>
-                    <Text style={{ color: '#d7d7d7' }}>{time}</Text>
+                    <View style={styles.iconTextContainer}>
+                        <Icon name="calendar" size={20} color="#d7d7d7" style={styles.icon} />
+                        <Text style={{ color: '#d7d7d7', marginRight: 10 }}>{date}</Text>
+                    </View>
+                    <View style={styles.iconTextContainer}>
+                        <Icon name="clock-o" size={20} color="#d7d7d7" style={styles.icon} />
+                        <Text style={{ color: '#d7d7d7' }}>{time}</Text>
+                    </View>
                 </View>
                 <TouchableOpacity onPress={handleAbsent} style={styles.submitButton}>
                     <Text style={styles.buttonText}>Clock In</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.box2}>
-                <Text style={styles.boxText}>Box 2</Text>
+                <View style={styles.rowContainer1}>
+                    <Text style={{ color: '#148FFF', fontSize: 12, fontWeight: '500' }}>Menu</Text>
+                    <Text style={{ color: '#000', fontSize: 12, fontWeight: '500' }}>Lihat Semua</Text>
+                </View>
+                <View style={styles.buttonContainer}>
+                    {/* Map through your buttons or manually add them */}
+                    <TouchableOpacity style={styles.button}>
+                        <Icon name="clock-o" size={20} color="#d7d7d7" style={styles.icon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <Icon name="clock-o" size={20} color="#d7d7d7" style={styles.icon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <Icon name="clock-o" size={20} color="#d7d7d7" style={styles.icon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <Icon name="clock-o" size={20} color="#d7d7d7" style={styles.icon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <Icon name="clock-o" size={20} color="#d7d7d7" style={styles.icon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <Icon name="clock-o" size={20} color="#d7d7d7" style={styles.icon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <Icon name="clock-o" size={20} color="#d7d7d7" style={styles.icon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <Icon name="clock-o" size={20} color="#d7d7d7" style={styles.icon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <Icon name="clock-o" size={20} color="#d7d7d7" style={styles.icon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <Icon name="clock-o" size={20} color="#d7d7d7" style={styles.icon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <Icon name="clock-o" size={20} color="#d7d7d7" style={styles.icon} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <Icon name="clock-o" size={20} color="#d7d7d7" style={styles.icon} />
+                    </TouchableOpacity>
+                </View>
             </View>
+
             <Button title="Logout" onPress={handleLogout} color="#FF5722" />
             {error ? <Text style={{ color: 'red', marginTop: 10 }}>{error}</Text> : null}
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#e7e7e7',
+        flexGrow: 1,
+        // justifyContent: 'flex-start', // Align content to the start
+        // alignItems: 'center',
+        // backgroundColor: '#e7e7e7',
         padding: 20,
     },
     submitButton: {
@@ -99,6 +149,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20, // Adjust this for horizontal padding
         alignSelf: 'flex-start', // Make button wrap its content
     },
+    iconTextContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        flex: 1,
+    },
+    icon: {
+        marginRight: 5, // Space between the icon and the text
+    },
     buttonText: {
         color: '#fff',
         fontSize: 16,
@@ -106,14 +164,48 @@ const styles = StyleSheet.create({
     },
     rowContainer: {
         flexDirection: 'row',
+        justifyContent: 'center',
+        width: '100%',
+        marginVertical: 10,
+    },
+    rowContainer1: {
+        flexDirection: 'row',
         justifyContent: 'space-between',
         width: '100%',
         marginVertical: 10,
     },
+    buttonContainer: {
+        flexDirection: 'row', // Keep flexDirection for compatibility
+        flexWrap: 'wrap', // Wrap buttons to the next line
+        justifyContent: 'space-between', // Distribute space evenly
+        padding: 10,
+        gap: 10, // Space between buttons
+    },
+    button: {
+        width: '20%', // Set width to 23% to account for gaps
+        aspectRatio: 1, // Ensures the button is square
+        marginBottom: 10, // Space between rows
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 8,
+        elevation: 5, // Android shadow
+        shadowColor: '#000', // iOS shadow
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 10,
+        fontWeight: 'bold',
+    },
+    
     box1: {
         width: '100%',
         height: 150,
         marginBottom: 10,
+        display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
@@ -126,18 +218,10 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     box2: {
-        width: 200,
-        height: 100,
-        marginBottom: 10,
+        width: '100%',
+        display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#FF5722',
-        borderRadius: 20,
-        elevation: 7, // Android shadow
-        shadowColor: '#000', // iOS shadow
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.5,
-        shadowRadius: 6,
     },
     box3: {
         width: 200,
